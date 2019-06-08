@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+
+    <Label text="Website Updater" textFill="blue" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">
+        <font>
+            <Font name="Times New Roman bold" size="40"/>
+        </font>
+    </Label>
+
+    <TextField promptText="Project Name" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+    <ComboBox prefWidth="150.0" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="General ECE"/>
+                <String fx:value="Android App"/>
+                <String fx:value="Webpage"/>
+                <String fx:value="Java Program"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <DatePicker promptText="Date of Completion" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+    <Label text="Skills Used" textFill="blue" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2" >
+        <font>
+            <Font name="Times New Roman" size="20"/>
+        </font>
+    </Label>
+
+    <GridPane GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="3">
+        <CheckBox mnemonicParsing="false" text="Java" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <CheckBox mnemonicParsing="false" text="Android Studio" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <CheckBox mnemonicParsing="false" text="App Design" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <CheckBox mnemonicParsing="false" text="Arduino" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <CheckBox mnemonicParsing="false" text="Circuit Design" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <CheckBox mnemonicParsing="false" text="Teamwork" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <CheckBox mnemonicParsing="false" text="HTML" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <CheckBox mnemonicParsing="false" text="CSS" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <CheckBox mnemonicParsing="false" text="Javascript" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+        <CheckBox mnemonicParsing="false" text="Web Design" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <CheckBox mnemonicParsing="false" text="Game Design" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <CheckBox mnemonicParsing="false" text="Unity" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+        <CheckBox mnemonicParsing="false" text="Unreal" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <CheckBox mnemonicParsing="false" text="Game Development" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <columnConstraints>
+            <ColumnConstraints percentWidth="33"/>
+            <ColumnConstraints percentWidth="33"/>
+            <ColumnConstraints percentWidth="33"/>
+        </columnConstraints>
+    </GridPane>
+
+        <TextField GridPane.rowIndex="6"/>
+        <TextField GridPane.rowIndex="7"/>
+    <TextField GridPane.rowIndex="8"/>
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="20"/>
+        <ColumnConstraints percentWidth="20"/>
+        <ColumnConstraints percentWidth="20"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+
+</GridPane>
