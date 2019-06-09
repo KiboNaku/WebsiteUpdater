@@ -55,9 +55,11 @@
         </font>
     </Label>
 
-    <TextField promptText="Project Name" fx:id="projectName" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <TextField promptText="Project Name" fx:id="projectName" GridPane.rowIndex="1" GridPane.columnIndex="0"
+               GridPane.columnSpan="2"/>
 
-    <ComboBox prefWidth="150.0" fx:id="projectType" promptText="Project Type" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2">
+    <ComboBox prefWidth="150.0" fx:id="projectType" promptText="Project Type" GridPane.rowIndex="2"
+              GridPane.columnIndex="0" GridPane.columnSpan="2">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="General ECE"/>
@@ -71,7 +73,8 @@
     <TextArea fx:id="description" GridPane.rowIndex="3" GridPane.columnIndex="0"
               GridPane.columnSpan="3" GridPane.rowSpan="2"/>
 
-    <DatePicker promptText="Date of Completion" fx:id="dateCompleted" GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <DatePicker promptText="Date of Completion" fx:id="dateCompleted" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                GridPane.columnSpan="2"/>
 
     <Label text="Skills Used" textFill="blue" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="2">
         <font>
