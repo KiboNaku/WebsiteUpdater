@@ -1,0 +1,118 @@
+
+#mainBody, #mainBody * {
+    -fx-background-color: #011E1A;
+    -fx-text-fill: #C4DFE6;
+}
+
+#mainBody .scroll-bar:horizontal, #mainBody .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+#mainBody .increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#mainBody .scroll-bar:horizontal .track,
+#mainBody .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+#mainBody .scroll-bar:horizontal .thumb,
+#mainBody .scroll-bar:vertical .thumb {
+    -fx-background-color: #C4DFE6;
+    -fx-background-radius: 5em;
+}
+
+#mainBody .text-field, #mainBody .text-area, #mainBody .combo-box {
+    -fx-border-style: solid;
+    -fx-border-color: #C4DFE6;
+    -fx-prompt-text-fill: #d8f7ff;
+    -fx-border-width: 2px;
+    -fx-text-fill: white;
+}
+
+#mainBody .text-field:focused, #mainBody .text-area:focused, #mainBody .combo-box:focused {
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+}
+
+#mainBody .date-picker {
+    -fx-background-color: white;
+    -fx-tick-label-fill: white;
+}
+
+#mainBody .date-picker .arrow-button {
+    -fx-background-color: #C4DFE6;
+}
+
+#mainBody .titled-pane > .title, #mainBody .button {
+    -fx-font-weight: bold;
+    -fx-background-color: #577c64;
+}
+
+#mainBody .titled-pane > .title {
+    -fx-font-size: 15;
+}
+
+#mainBody .titled-pane:focused > .title > .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+#mainBody .titled-pane > .title > .arrow-button {
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+#mainBody .titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: white, #002d2b;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+#mainBody .check-box {
+    -fx-font-size: 15;
+}
+
+#mainBody .check-box .box {
+    -fx-background-color: #C4DFE6;
+}
+
+#mainBody .check-box:hover {
+    -fx-text-fill: white;
+}
+
+#mainBody .check-box:hover .box {
+    -fx-background-color: white;
+}
+
+
+#mainBody .check-box .mark {
+    -fx-background-color: null;
+}
+
+#mainBody .check-box:selected .mark {
+    -fx-background-color: #011E1A;
+}
+
+/*#mainBody .titled-pane > *.content {*/
+/*    -fx-background-color: #95F1E8;*/
+/*}*/
+
+/*.titled-pane{*/
+/*    -fx-text-fill: #C4DFE6;*/
+/*}*/
+
+
+/*#mainCenterBody{*/
+/*    -fx-border-style: solid;*/
+/*    -fx-border-color: red;*/
+/*    -fx-border-width: 3px;*/
+/*    -fx-background-color: black;*/
+/*}*/
+

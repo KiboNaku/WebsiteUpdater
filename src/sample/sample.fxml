@@ -12,130 +12,139 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.BorderPane?>
-
 <?import javafx.geometry.Insets?>
-
-<!--<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">-->
-
-<!--    <top>-->
-
-<!--        <Label text="Website Updater" textFill="blue" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">-->
-
-<!--            <padding>-->
-<!--                <Insets topRightBottomLeft="30"/>-->
-<!--            </padding>-->
-
-<!--            <font>-->
-<!--                <Font name="Times New Roman bold" size="25"/>-->
-<!--            </font>-->
-<!--            -->
-<!--            -->
-
-<!--        </Label>-->
-
-<!--    </top>-->
-
-<!--</BorderPane>-->
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="sample.Controller"
-          style="-fx-border-color: blue; -fx-border-width: 10; -fx-border-style: solid">
 
-    <padding>
-        <Insets topRightBottomLeft="40"/>
-    </padding>
+<?import javafx.scene.layout.BorderPane?>
 
-    <Label text="Website Updater" textFill="blue" GridPane.rowIndex="0" GridPane.columnIndex="0"
-           GridPane.columnSpan="3">
-        <font>
-            <Font name="Times New Roman bold" size="40"/>
-        </font>
-    </Label>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.cell.TextFieldListCell?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Accordion?>
 
-    <TextField promptText="Project Name" fx:id="projectName" GridPane.rowIndex="1" GridPane.columnIndex="0"
-               GridPane.columnSpan="2"/>
 
-    <ComboBox prefWidth="150.0" fx:id="projectType" promptText="Project Type" GridPane.rowIndex="2"
-              GridPane.columnIndex="0" GridPane.columnSpan="2">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="General ECE"/>
-                <String fx:value="Android App"/>
-                <String fx:value="Webpage"/>
-                <String fx:value="Java Program"/>
-            </FXCollections>
-        </items>
-    </ComboBox>
+<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" fx:id="mainBody"
+            stylesheets="@styles.css">
 
-    <TextArea fx:id="description" GridPane.rowIndex="3" GridPane.columnIndex="0"
-              GridPane.columnSpan="3" GridPane.rowSpan="2"/>
+    <top>
 
-    <DatePicker promptText="Date of Completion" fx:id="dateCompleted" GridPane.rowIndex="5" GridPane.columnIndex="0"
-                GridPane.columnSpan="2"/>
+        <Label text="Website Updater" textFill="blue" GridPane.rowIndex="0" GridPane.columnIndex="0"
+               GridPane.columnSpan="3">
 
-    <Label text="Skills Used" textFill="blue" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="2">
-        <font>
-            <Font name="Times New Roman" size="20"/>
-        </font>
-    </Label>
+            <padding>
+                <Insets topRightBottomLeft="30"/>
+            </padding>
 
-    <GridPane fx:id="skillsUsed" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="3">
-        <CheckBox mnemonicParsing="false" text="Java" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <CheckBox mnemonicParsing="false" text="Android Studio" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <CheckBox mnemonicParsing="false" text="App Design" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-        <CheckBox mnemonicParsing="false" text="Arduino" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <CheckBox mnemonicParsing="false" text="Circuit Design" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <CheckBox mnemonicParsing="false" text="Teamwork" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <CheckBox mnemonicParsing="false" text="HTML" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <CheckBox mnemonicParsing="false" text="CSS" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        <CheckBox mnemonicParsing="false" text="Javascript" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-        <CheckBox mnemonicParsing="false" text="Web Design" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <CheckBox mnemonicParsing="false" text="Game Design" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <CheckBox mnemonicParsing="false" text="Unity" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-        <CheckBox mnemonicParsing="false" text="Unreal" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <CheckBox mnemonicParsing="false" text="Game Development" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <font>
+                <Font name="Times New Roman bold" size="30"/>
+            </font>
 
-        <columnConstraints>
-            <ColumnConstraints percentWidth="33"/>
-            <ColumnConstraints percentWidth="33"/>
-            <ColumnConstraints percentWidth="33"/>
-        </columnConstraints>
-    </GridPane>
+        </Label>
 
-    <Label text="Github Page: " GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-    <TextField fx:id="githubPage" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+    </top>
 
-    <Label text="Google Play: " GridPane.rowIndex="9" GridPane.columnIndex="0"/>
-    <TextField fx:id="googlePlay" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+    <center>
 
-    <Label text="Learn More: " GridPane.rowIndex="10" GridPane.columnIndex="0"/>
-    <TextField fx:id="learnMore" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+        <ScrollPane>
 
-    <Button text="Generate" onAction="#onButtonClicked" GridPane.rowIndex="11"></Button>
+            <padding>
+                <Insets topRightBottomLeft="30"/>
+            </padding>
 
-    <columnConstraints>
-        <ColumnConstraints percentWidth="20"/>
-        <ColumnConstraints percentWidth="20"/>
-        <ColumnConstraints percentWidth="20"/>
-    </columnConstraints>
+            <VBox spacing="20" fx:id="mainCenterBody">
+                <Accordion expandedPane="$basicInfo">
 
-    <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-    </rowConstraints>
+                    <panes>
 
-</GridPane>
+                        <TitledPane fx:id="basicInfo" text="Basic Info" styleClass="section">
+                            <FlowPane orientation="VERTICAL" vgap="10">
+
+                                <TextField promptText="Project Name" fx:id="projectName"/>
+
+                                <HBox spacing="10">
+                                    <ComboBox fx:id="projectStatus" promptText="Project Status">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Published"/>
+                                                <String fx:value="In Development"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+
+
+                                    <ComboBox fx:id="projectType" promptText="Project Type">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="General ECE"/>
+                                                <String fx:value="Android App"/>
+                                                <String fx:value="Webpage"/>
+                                                <String fx:value="Java Program"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                                </HBox>
+
+                                <DatePicker promptText="Date of Completion" fx:id="dateCompleted"/>
+
+                                <TextArea fx:id="description" promptText="Enter a description"/>
+
+                            </FlowPane>
+                        </TitledPane>
+
+                        <TitledPane text="Skills Used">
+                            <TilePane fx:id="skills" prefColumns="4" vgap="5" hgap="15" tileAlignment="TOP_LEFT">
+                                <CheckBox mnemonicParsing="false" text="Java"/>
+                                <CheckBox mnemonicParsing="false" text="Android Studio"/>
+                                <CheckBox mnemonicParsing="false" text="App Design"/>
+                                <CheckBox mnemonicParsing="false" text="Arduino"/>
+                                <CheckBox mnemonicParsing="false" text="Circuit Design"/>
+                                <CheckBox mnemonicParsing="false" text="Teamwork"/>
+                                <CheckBox mnemonicParsing="false" text="HTML"/>
+                                <CheckBox mnemonicParsing="false" text="CSS"/>
+                                <CheckBox mnemonicParsing="false" text="Javascript"/>
+                                <CheckBox mnemonicParsing="false" text="Web Design"/>
+                                <CheckBox mnemonicParsing="false" text="Game Design"/>
+                                <CheckBox mnemonicParsing="false" text="Unity"/>
+                                <CheckBox mnemonicParsing="false" text="Unreal"/>
+                                <CheckBox mnemonicParsing="false" text="Game Development"/>
+                            </TilePane>
+                        </TitledPane>
+
+                        <TitledPane text="Additional Links">
+                            <FlowPane vgap="7">
+                                <HBox spacing="10">
+                                    <Label text="Github Page:" prefWidth="70"/>
+                                    <TextField fx:id="githubPage" prefWidth="200"/>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label text="Google Play:" prefWidth="70"/>
+                                    <TextField fx:id="googlePlay" prefWidth="200"/>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <Label text="Learn More:" prefWidth="70"/>
+                                    <TextField fx:id="learnMore" prefWidth="200"/>
+                                </HBox>
+                            </FlowPane>
+                        </TitledPane>
+
+                    </panes>
+
+                </Accordion>
+
+                <Button text="Generate" onAction="#onButtonClicked"/>
+
+            </VBox>
+
+        </ScrollPane>
+    </center>
+
+</BorderPane>
+
