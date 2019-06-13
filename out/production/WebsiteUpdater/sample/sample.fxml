@@ -7,9 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <?import javafx.geometry.Insets?>
@@ -20,56 +18,42 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.cell.TextFieldListCell?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Accordion?>
 
 
-
-<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" fx:id="mainBody" stylesheets="@styles.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="sample.Controller" stylesheets="@styles.css">
 
     <top>
 
-        <Label text="Website Updater" textFill="blue" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">
+        <HBox fx:id="titleLabel">
+            <Label  text="Website Updater"/>
+        </HBox>
 
-            <padding>
-                <Insets topRightBottomLeft="30"/>
-            </padding>
-
-            <font>
-                <Font name="Times New Roman bold" size="30"/>
-            </font>
-
-        </Label>
 
     </top>
 
     <center>
 
-        <ScrollPane>
+        <ScrollPane fx:id="centerScrollPane">
 
-            <padding>
-                <Insets topRightBottomLeft="30"/>
-            </padding>
-
-            <VBox spacing="20" fx:id="mainCenterBody">
+            <VBox fx:id="mainCenterBody" spacing="20">
                 <Accordion expandedPane="$basicInfo">
 
                     <panes>
 
-                        <TitledPane fx:id="basicInfo" text="Basic Info" styleClass="section">
-                            <FlowPane orientation="VERTICAL" vgap="10">
+                        <TitledPane fx:id="basicInfo" text="Basic Info">
+                            <VBox spacing="10">
 
-                                <TextField promptText="Project Name" fx:id="projectName"/>
+                                <TextField fx:id="projectName" promptText="Project Name"/>
 
                                 <HBox spacing="10">
-                                    <ComboBox fx:id="projectStatus" promptText="Project Status">
+
+                                    <ComboBox fx:id="projectStatus" promptText="Project Status" onAction="#checkStatus">
                                         <items>
                                             <FXCollections fx:factory="observableArrayList">
                                                 <String fx:value="Published"/>
@@ -78,28 +62,28 @@
                                         </items>
                                     </ComboBox>
 
+                                    <DatePicker fx:id="dateCompleted" promptText="Date of Completion"/>
 
-                                    <ComboBox fx:id="projectType" promptText="Project Type">
-                                        <items>
-                                            <FXCollections fx:factory="observableArrayList">
-                                                <String fx:value="General ECE"/>
-                                                <String fx:value="Android App"/>
-                                                <String fx:value="Webpage"/>
-                                                <String fx:value="Java Program"/>
-                                            </FXCollections>
-                                        </items>
-                                    </ComboBox>
                                 </HBox>
 
-                                <DatePicker promptText="Date of Completion" fx:id="dateCompleted"/>
+                                <ComboBox fx:id="projectType" promptText="Project Type">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="General ECE"/>
+                                            <String fx:value="Android App"/>
+                                            <String fx:value="Webpage"/>
+                                            <String fx:value="Java Program"/>
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
 
                                 <TextArea fx:id="description" promptText="Enter a description"/>
 
-                            </FlowPane>
+                            </VBox>
                         </TitledPane>
 
                         <TitledPane text="Skills Used">
-                            <TilePane fx:id="skills" prefColumns="4" vgap="5" hgap="15" tileAlignment="TOP_LEFT">
+                            <TilePane fx:id="skillsUsed" prefColumns="4" tileAlignment="TOP_LEFT" vgap="5" hgap="15">
                                 <CheckBox mnemonicParsing="false" text="Java"/>
                                 <CheckBox mnemonicParsing="false" text="Android Studio"/>
                                 <CheckBox mnemonicParsing="false" text="App Design"/>
@@ -118,18 +102,18 @@
                         </TitledPane>
 
                         <TitledPane text="Additional Links">
-                            <FlowPane vgap="7">
-                                <HBox spacing="10">
-                                    <Label text="Github Page:" prefWidth="70"/>
-                                    <TextField fx:id="githubPage" prefWidth="200"/>
+                            <FlowPane fx:id="additionalLinks" orientation="VERTICAL" vgap="7">
+                                <HBox styleClass="linkBox" spacing="10" alignment="CENTER">
+                                    <Label text="Github Page:" prefWidth="100"/>
+                                    <TextField prefWidth="200"/>
                                 </HBox>
-                                <HBox spacing="10">
-                                    <Label text="Google Play:" prefWidth="70"/>
-                                    <TextField fx:id="googlePlay" prefWidth="200"/>
+                                <HBox styleClass="linkBox" spacing="10" alignment="CENTER">
+                                    <Label text="Google Play:" prefWidth="100"/>
+                                    <TextField prefWidth="200"/>
                                 </HBox>
-                                <HBox spacing="10">
-                                    <Label text="Learn More:" prefWidth="70"/>
-                                    <TextField fx:id="learnMore" prefWidth="200"/>
+                                <HBox styleClass="linkBox" spacing="10" alignment="CENTER">
+                                    <Label text="Learn More:" prefWidth="100"/>
+                                    <TextField prefWidth="200"/>
                                 </HBox>
                             </FlowPane>
                         </TitledPane>
@@ -138,7 +122,7 @@
 
                 </Accordion>
 
-                <Button text="Generate" onAction="#onButtonClicked"/>
+                <Button fx:id="generate" text="Generate" onAction="#onButtonClicked"/>
 
             </VBox>
 
