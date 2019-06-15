@@ -157,6 +157,10 @@
     -fx-background-color: #95F1E8;
 }
 
+#additionalLinks {
+    -fx-spacing: 7px;
+}
+
 #additionalLinks .label {
     -fx-font-size: 12px;
 }
@@ -164,4 +168,3 @@
 #additionalLinks .linkBox:hover .label {
     -fx-text-fill: #95F1E8;
 }
-

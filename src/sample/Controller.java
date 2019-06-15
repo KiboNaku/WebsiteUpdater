@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,63 +39,119 @@ public class Controller {
 
 
     //Additional Links
-
+    @FXML
+    private VBox additionalLinks;
 
     //Submit
     @FXML
     private Button generate;
 
-    private String htmlLocation = "C:\\Users\nakuk\\OneDrive\\Documents\\GitHub\\index.html";
+//    private List<Control> requiredFields;
+
+    private String htmlLocation = "C:\\Users\\nakuk\\OneDrive\\Documents\\GitHub\\KiboNaku.github.io\\index.html";
 
     @FXML
     public void initialize(){
         dateCompleted.setVisible(false);
         generate.setDisable(true);
+
+//        requiredFields = Arrays.asList(projectName, projectStatus, dateCompleted, projectType, description);
+    }
+
+    private static boolean isTextInputFilledIn(TextInputControl textInputControl){
+        return textInputControl.getText() != null && textInputControl.getText().trim().length() > 0;
+    }
+
+    private static boolean isComboBoxBaseFilledIn(ComboBoxBase comboBoxBase){
+        return comboBoxBase.getValue() != null;
+    }
+
+    private boolean projectPublished(){
+        return projectStatus.getValue().toString().toLowerCase().equals("published");
+    }
+
+    private boolean isProjectStatusFilled(){
+        if(!isComboBoxBaseFilledIn(projectType)) return false;
+        if(projectPublished()) return isComboBoxBaseFilledIn(dateCompleted);
+        return true;
+    }
+
+    private boolean isSkillsFilledIn(){
+        List<Node> skills =  skillsUsed.getChildren();
+        for(Node skill : skills){
+            CheckBox skillCheckBox = (CheckBox) skill;
+            if(skillCheckBox.isSelected()) return true;
+        }
+        return false;
+    }
+
+    private boolean hasAdditionalLinks(){
+        List<Node> links = additionalLinks.getChildren();
+        for(Node link : links){
+            HBox linkHBox = (HBox) link;
+            TextField linkField = (TextField) linkHBox.getChildren().get(1);
+            if(isTextInputFilledIn(linkField)) return true;
+        }
+        return false;
+    }
+
+    private boolean formFilledOut(){
+        return isTextInputFilledIn(projectName) && isComboBoxBaseFilledIn(projectStatus)
+                && isProjectStatusFilled() && isTextInputFilledIn(description);
     }
 
     @FXML
     public void checkStatus(){
-        if(projectStatus.getValue().toString().toLowerCase().equals("published")){
+        if(projectPublished()){
             dateCompleted.setVisible(true);
         }else{
             dateCompleted.setVisible(false);
         }
+        canSubmit();
     }
 
     @FXML
-    public void onButtonClicked() {
-//        String projectNameStr = projectName.getText();
-//        String projectTypeStr = projectType.getValue().toString();
-//        String descriptionStr = description.getText();
-//        String dateCompletedStr = dateCompleted.getValue().toString();
-//
-//        List<Node> skillsUsedChildren = skillsUsed.getChildren();
-//        List<String> skillsUsedList = new ArrayList<>();
-//
-//        for (Node checkBox : skillsUsedChildren) {
-//            if (((CheckBox) checkBox).isSelected()) skillsUsedList.add(((CheckBox) checkBox).getText());
-//        }
-//
-//        String githubLink = githubPage.getText();
-//        String gPlayLink = googlePlay.getText();
-//        String learnMoreLink = learnMore.getText();
-//
-//        String html = getProjectSetup(projectNameStr, projectTypeStr, descriptionStr,
-//                dateCompletedStr, skillsUsedList, githubLink, gPlayLink, learnMoreLink);
-//        System.out.println(html);
-//        try {
-//            updateHtml(html);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    public void canSubmit(){
+        generate.setDisable(!formFilledOut());
+    }
+
+    @FXML
+    public void createProject() {
+
+        String html = generateProjectHTML();
+        System.out.println(html);
+        try {
+            updateHtml(html);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String generateProjectHTML(){
+
+        String skillsStr = isSkillsFilledIn() ? getSkillsString() : "";
+        String linksStr = hasAdditionalLinks() ? getLinksString() : "";
+        return  "\n" +
+                tab(4) + "<div class=\"project\">\n" +
+                    tab(5) + "<h3>" + projectName.getText() + "</h3>\n" +
+                    tab(5) +     "<p class=\"type\">" + "Type: " + projectType.getValue().toString() + "</p>\n" +
+                    (projectPublished() ?
+                        tab(5) + "<p class=\"date\">" + dateCompleted.getValue().toString() + "</p>\n" : "") +
+                    tab(5) + "<p>" + description.getText() + "</p>\n" +
+                    skillsStr +
+                    linksStr +
+                tab(4) + "</div>\n";
+    }
+
+    private String tab(int tabs){
+        return "\t".repeat(tabs);
     }
 
     private void updateHtml(String projectStr) throws IOException {
 
         StringBuilder htmlBuilder = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(
-                    "C:\\Users\\nakuk\\OneDrive\\Documents\\GitHub\\KiboNaku.github.io\\index.html"));
+            BufferedReader in = new BufferedReader(new FileReader(htmlLocation));
             String str;
             while ((str = in.readLine()) != null) {
                 htmlBuilder.append(str).append("\n");
@@ -104,15 +161,15 @@ public class Controller {
             e.printStackTrace();
         }
 
-        String html = htmlBuilder.toString();
-
+        String fullHtml = htmlBuilder.toString();
+//        System.out.println(fullHtml);
         String pattern = "(.*<h1 id=\"projects_heading\">Noteable Projects</h1>).*";
 
         // Create a Pattern object
         Pattern r = Pattern.compile(pattern, Pattern.DOTALL);
 
         // Now create matcher object.
-        Matcher m = r.matcher(html);
+        Matcher m = r.matcher(fullHtml);
         if (m.find()) {
             System.out.println("Found value: " + m.group(0));
             System.out.println("Found value: " + m.group(1));
@@ -122,44 +179,51 @@ public class Controller {
 
         String end = m.group(0).substring(m.group(1).length());
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(
-                "C:\\Users\\nakuk\\OneDrive\\Documents\\GitHub\\KiboNaku.github.io\\index.html"));
-        System.out.println("beginning: " + m.group(0));
-        System.out.println("end: " + end);
-        writer.write(m.group(1) + projectStr + end);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(htmlLocation));
+//        System.out.println("beginning: " + m.group(0));
+//        System.out.println("end: " + end);
+        writer.write(m.group(1) + "\n" +  projectStr + end);
         writer.close();
     }
 
-    private String getProjectSetup(String projectName, String type, String descrip, String date,
-                                   List<String> skills, String githubLink,
-                                   String gPlayLink, String learnMoreLink) {
+    private String getSkillsString() {
 
-        String html = "<div class=\"project\">\n" +
-                "<h3>" + projectName + "</h3>\n" +
-                "<p class=\"type\">Type: " + type + "</p>\n" +
-                "<p class=\"date\">" + date + "</p>\n" +
-                "<p>" + descrip + "</p>\n";
-        if (skills.size() > 0) html += getSkillsString(skills);
-        if (githubLink.length() > 0 || gPlayLink.length() > 0 || learnMoreLink.length() > 0) {
-            html += "<p>" +
-                    (githubLink.length() > 0 ? "<a href=\"" + githubLink + "\">Github page</a><br>" : "") +
-                    (gPlayLink.length() > 0 ? "<a href=\"" + gPlayLink + "\">Google Play</a><br>" : "") +
-                    (learnMoreLink.length() > 0 ? "<a href=\"" + learnMoreLink + "\">Learn more...</a><br>" : "") +
-                    "</p>";
+        List<String> skills = new ArrayList<>();
+        for (Node checkBox : skillsUsed.getChildren()) {
+            if (((CheckBox) checkBox).isSelected()) skills.add(((CheckBox) checkBox).getText());
         }
-        html += "</div>";
-        return html;
+
+        StringBuilder skillBase = new StringBuilder();
+        for (String skill : skills)
+            skillBase.append(tab(6))
+                .append("<li>").append(skill).append("</li>").append("\n");
+        return
+                "\n" +
+                tab(5) + "Skills Used:\n" +
+                    tab(5) + "<ul>\n" +
+                        skillBase.toString() + "\n" +
+                    tab(5) + "</ul>\n";
     }
 
-    private String getSkillsString(List<String> skills) {
-        String skillBase = "";
-        for (String skill : skills) skillBase += "<li>" + skill + "</li>";
-        String skillsStr = "Skills Used:\n" + "<ul>\n" + skillBase + "\n" + "</ul>";
-        return skillsStr;
-    }
+    private String getLinksString(){
+        StringBuilder linksStr = new StringBuilder();
 
-    private boolean formFilledOut(){
-        if(projectName.getText().trim().isEmpty()) return false;
-        return true;
+        List<Node> links = additionalLinks.getChildren();
+        for(Node link : links){
+            List<Node> linkHBox = ((HBox) link).getChildren();
+            Label linkLabel = (Label) linkHBox.get(0);
+            TextField linkField = (TextField) linkHBox.get(1);
+            if(isTextInputFilledIn(linkField)){
+                linksStr
+                        .append(tab(6))
+                        .append("<a href=\"")
+                        .append(linkField.getText())
+                        .append("\">")
+                        .append(linkLabel.getText())
+                        .append("</a><br>\n");
+            }
+        }
+        return tab(5) + "<p>\n" + linksStr.toString() + tab(5) + "</p>\n";
     }
 }
+

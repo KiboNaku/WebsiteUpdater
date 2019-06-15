@@ -29,7 +29,7 @@ public class Main extends Application {
 //        root.getChildren().add(label);
 
         primaryStage.setTitle("Website Updater");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 800, 835));
         primaryStage.show();
     }
 
@@ -38,3 +38,5 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+
